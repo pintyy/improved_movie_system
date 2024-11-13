@@ -1,3 +1,4 @@
+use std::fmt;
 
 #[derive(Debug)]
 struct Movie {
@@ -24,7 +25,10 @@ impl Movie {
             movie_info,
 
         }
+
+        
     }
+
     
 }
 
@@ -43,7 +47,8 @@ impl Movie_database {
         self.movies.iter().find(|movie|movie.name==name)
 
     }
-    
+    fn movie_find_by_year(&self, year: u32) -> Vec<&Movie> {
+    self.movies.iter().filter(|movie| movie.publish_year <= year).collect() }
 }
 
 
@@ -186,8 +191,24 @@ Famous actors : {}
 
 About movie : {}"
 ,movie.name,movie.publish_year, movie.famous_actors, movie.movie_info)
-
+}
+    else {
+    println!("Movie '{}' not found in the database.", movie_name);
     }
+    
+   
+    println!("----------------------");
+    
+
+
+    let before_year=2016;
+    let movies_before_2016=movie_database.movie_find_by_year(before_year);
+    println!("Movies before {}:", before_year);
+    for movie in movies_before_2016  {
+        println!("{:#?}",movie.name)
+        
+    }
+    
 
     //println!("{:#?}",movie_database); tüm databasei yazdırıyor
 }
