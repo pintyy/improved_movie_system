@@ -180,7 +180,7 @@ let movie15 = Movie::new(
 
 
 
-    let movie_name="Better Call Saul";
+    let movie_name="The Sopranos";
 
     if let Some(movie) = movie_database.movie_find_by_name(movie_name) {
         println!("All informations about {} : 
@@ -190,7 +190,15 @@ Publish year: {}
 Famous actors : {}
 
 About movie : {}"
-,movie.name,movie.publish_year, movie.famous_actors, movie.movie_info)
+,movie.name,movie.publish_year, movie.famous_actors, movie.movie_info);
+ 
+ let publish_year=movie.publish_year;
+ let movies_before_year = movie_database.movie_find_by_year(publish_year);
+ println!("\nMovies before {}:", publish_year);
+        for movie in movies_before_year {
+            println!("{:#?}", movie.name);
+        }
+
 }
     else {
     println!("Movie '{}' not found in the database.", movie_name);
@@ -201,15 +209,9 @@ About movie : {}"
     
 
 
-    let before_year=2016;
-    let movies_before_2016=movie_database.movie_find_by_year(before_year);
-    println!("Movies before {}:", before_year);
-    for movie in movies_before_2016  {
-        println!("{:#?}",movie.name)
-        
-    }
+    
     
 
-    //println!("{:#?}",movie_database); tüm databasei yazdırıyor
+    //println!("{:#?}",movie_database); tüm databasei yazdırıyo
 }
 
